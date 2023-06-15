@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: kubia
+spec:
+  replicas: 3
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - kubia
+  template:
+    metadata:
+      labels:
+        app: kubia
+        created-by: kubia-replicaset
+    spec:
+      containers:
+      - name: kubia
+        image: noelxp/kubia
+        ports:
+        - containerPort: 8080
